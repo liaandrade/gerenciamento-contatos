@@ -34,6 +34,13 @@
                                 <td class="border px-4 py-2">{{ $contact->email }}</td>
                                 <td class="border px-4 py-2">{{ $contact->phone }}</td>
                                 <td class="border px-4 py-2">{{ $contact->address }}</td>
+                                <td>
+                                    <form action="{{route('contacts.destroy', $contact-> id)}}">
+                                        @crsf
+                                        @method ('DELETE')
+                                        <button type= "submit" onclick="return confirm('Tem certeza que deseja excluir esse contato? Esaa ação é permanente.')" >Excluir</button>
+                                    </form>
+                                </td>
                             </tr>
                         @empty
                             <tr>
