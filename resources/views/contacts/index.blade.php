@@ -34,11 +34,20 @@
                                 <td class="border px-4 py-2">{{ $contact->email }}</td>
                                 <td class="border px-4 py-2">{{ $contact->phone }}</td>
                                 <td class="border px-4 py-2">{{ $contact->address }}</td>
-                                <td>
-                                    <form action="{{route('contacts.destroy', $contact-> id)}}">
-                                        @crsf
-                                        @method ('DELETE')
-                                        <button type= "submit" onclick="return confirm('Tem certeza que deseja excluir esse contato? Esaa ação é permanente.')" >Excluir</button>
+                                <td class="border px-4 py-2">
+                                    <a href="{{ route('contacts.edit', $contact->id) }}"
+                                       class="inline-block bg-yellow-500 text-white font-semibold px-4 py-1 rounded hover:bg-yellow-600 transition">
+                                        Editar
+                                    </a>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esse contato? Essa ação é permanente.')"
+                                                class="bg-red-500 text-white font-semibold px-4 py-1 rounded hover:bg-red-600 transition">
+                                            Excluir
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

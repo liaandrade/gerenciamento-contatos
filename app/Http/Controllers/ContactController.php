@@ -43,6 +43,26 @@ class ContactController extends Controller
         return redirect()->route('contacts.index')->with('success', 'Contato criado com sucesso!');
     }
 
+    public function edit($id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contacts.edit', compact('contact'));
+    }
+
+    public function update(Request $request, $id) {
+        $contact = Contact::findOrFail($id); 
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        $contact->update($data); 
+        return redirect()->route('contacts.index')->with('success', 'Contato atualizado com sucesso!');
+    }
+
     public function destroy($id) {
         $contact = Contact::findOrFail($id); 
         $contact->delete(); 
